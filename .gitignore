@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtualenv
+venv/
+ENV/
+.env/
+.venv/
+
+# VSCode
+.vscode/
+
+# SQLite database
+*.db
+*.sqlite3
+
+# Env files
+.env
+.env.*
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+
+# Migrations (если будете использовать alembic)
+alembic/ 
