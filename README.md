@@ -15,14 +15,14 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Maksim2801/AuthService.git
 cd authserver
 ```
 
 2. Создайте виртуальное окружение и установите зависимости:
 ```bash
 python -m venv venv
-venv\Scripts\activate     # для Windows
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
