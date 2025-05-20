@@ -1,10 +1,9 @@
 import random
-import requests
+import aiohttp
 from datetime import datetime, timedelta
 from fastapi import HTTPException, status
-from app.config import get_settings
-
-settings = get_settings()
+from app.config import settings
+from app.constants import PHONE_REGEX
 
 class SMSService:
     @staticmethod
@@ -38,7 +37,7 @@ class SMSService:
             )
         return digits
 
-    def send_verification_code(self, phone: str, code: str) -> None:
+    async def send_verification_code(self, phone: str, code: str) -> None:
         """
         Отправка кода верификации на телефон через SMS.ru
         
@@ -52,17 +51,18 @@ class SMSService:
         formatted_phone = self.validate_phone_number(phone)
         url = "https://sms.ru/sms/send"
         params = {
-            "api_id": settings.smsru_api_id,
+            "api_id": settings.SMSRU_API_ID,
             "to": formatted_phone,
             "msg": f"Ваш код подтверждения: {code}",
             "json": 1
         }
         try:
-            response = requests.get(url, params=params)
-            data = response.json()
-            if data.get("status") != "OK":
-                raise Exception(data.get("status_text", "Unknown error"))
-            print(f"SMS sent successfully to {formatted_phone}")
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=params) as response:
+                    data = await response.json()
+                    if data.get("status") != "OK":
+                        raise Exception(data.get("status_text", "Unknown error"))
+                    print(f"SMS sent successfully to {formatted_phone}")
         except Exception as e:
             print(f"Error sending SMS: {str(e)}")
             raise HTTPException(
