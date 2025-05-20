@@ -1,6 +1,6 @@
 # Authentication Service
 
-Простой сервис аутентификации на FastAPI с верификацией телефона через SMS.ru, поддержкой refresh токенов, входом по email и телефону, восстановлением по email и защитой от DoS-атак (rate limiting).
+Простой сервис аутентификации на FastAPI
 
 ## Особенности
 
@@ -19,14 +19,14 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Maksim2801/AuthService.git
 cd authserver
 ```
 
 2. Создайте виртуальное окружение и установите зависимости:
 ```bash
 python -m venv venv
-venv\Scripts\activate     # для Windows
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -165,9 +165,5 @@ Authorization: Bearer <access_token>
 - 403: Телефон не верифицирован
 - 404: Пользователь не найден
 - 429: Превышен лимит запросов
-
-## Документация OpenAPI
-Swagger UI: http://localhost:8000/docs
-ReDoc: http://localhost:8000/redoc
 
 ---
